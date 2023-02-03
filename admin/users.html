@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Admin | Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link
+      href="../assets/vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template-->
+    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link
+      href="../assets/vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <!-- Sidebar - Brand -->
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="index.html"
+        >
+          <!-- <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div> -->
+          <div class="sidebar-brand-text mx-3">Admin Panel</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item" data-link="dashboard">
+          <a class="nav-link set-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+
+        <!-- Heading -->
+        <div class="sidebar-heading">Data</div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="true"
+            aria-controls="collapseTwo"
+          >
+            <i class="fas fa-fw fa-list-ul"></i>
+            <span>Data Reklame</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a
+                class="collapse-item set-link"
+                data-link="reklame"
+                href="reklame.html"
+                >Reklame Terdaftar</a
+              >
+              <a
+                class="collapse-item set-link"
+                data-link="izin"
+                href="izin-reklame.html"
+                >Kelola Izin Reklame</a
+              >
+            </div>
+          </div>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item" data-link="user">
+          <a class="nav-link set-link" href="users.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Data Users</span></a
+          >
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <!-- Topbar -->
+          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span
+                    class="nameUser mr-2 d-none d-lg-inline text-gray-600 small"
+                  ></span>
+                  <img
+                    class="img-profile rounded-circle"
+                    src="../assets/img/undraw_profile.svg"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#logoutModal"
+                  >
+                    <i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>
+                    Logout
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <!-- End of Topbar -->
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <div
+              class="d-sm-flex align-items-center justify-content-between mb-4"
+            >
+              <h1 class="h3 mb-0 text-gray-800">Data Users</h1>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Basic Card Example -->
+                <div class="card shadow mb-4">
+                  <div
+                    class="card-header py-2 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      List Data Users
+                    </h6>
+                    <button
+                      class="btn btn-primary btn-sm"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      id="btn-tambah"
+                    >
+                      <i class="fas fa-fw fa-plus"></i> Tambah Data
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <table
+                      class="table table-sm table-bordered table-hovered"
+                      id="dataTable"
+                    >
+                      <thead class="bg-primary text-white">
+                        <th>#</th>
+                        <th>Fullname</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Aksi</th>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Reklame 2023</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div
+      class="modal fade"
+      id="logoutModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button
+              class="close"
+              type="button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Select "Logout" below if you are ready to end your current session.
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <a
+              class="btn btn-primary"
+              onclick="javascript: localStorage.clear()"
+              href="../index.html"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal input -->
+    <form id="form-input">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalInputLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalInputLabel"></h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Fullname</label>
+                <input
+                  name="fullname"
+                  type="text"
+                  class="form-control"
+                  id="exampleInputfullname1"
+                  placeholder="Enter fullname"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input
+                  name="username"
+                  type="text"
+                  class="form-control"
+                  id="exampleInputusername1"
+                  placeholder="Enter username"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  name="email"
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Role</label>
+                <select
+                  name="role"
+                  class="form-control"
+                  id="exampleFormControlSelect1"
+                >
+                  <option value="member">Member</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <div class="input-group">
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="password-eye"
+                      ><i class="fas fa-fw fa-eye-slash"></i
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" id="edit-submit" class="btn btn-warning">
+                <i class="fas fa-fw fa-edit"></i> Edit
+              </button>
+              <button type="submit" id="save-submit" class="btn btn-primary">
+                <i class="fas fa-fw fa-save"></i> Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../assets/js/sweetalert.js"></script>
+    <script src="../assets/js/custom.js"></script>
+    <script type="module">
+      import {
+        getData,
+        insertData,
+        updateData,
+        deleteData,
+        login,
+      } from "../assets/js/firebase.js";
+
+      $(document).ready(function () {
+        let formInput = $("#form-input")[0];
+
+        $("#password-eye").on("click", function (e) {
+          $("#password-eye i").toggleClass("fa-eye fa-eye-slash");
+          let type =
+            $("#password-eye i.fa-eye").length > 0 ? "text" : "password";
+          $("#exampleInputPassword1").attr("type", type);
+        });
+
+        const dataTable = $("#dataTable").DataTable({
+          processing: true,
+          ajax: {
+            url: "https://reklame-b464e-default-rtdb.asia-southeast1.firebasedatabase.app/users.json",
+            dataSrc: function (obj) {
+              const CollectRecord = [];
+              for (const key in obj) {
+                if (Object.hasOwnProperty.call(obj, key)) {
+                  const data = obj[key];
+                  const newData = Object.assign({ id: key }, data);
+                  CollectRecord.push(newData);
+                }
+              }
+              return CollectRecord;
+            },
+          },
+          columns: [
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                return meta.row + 1;
+              },
+            },
+            { data: "fullname" },
+            { data: "username" },
+            { data: "role" },
+            { data: "email" },
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                let btnAksi = `
+                  <span class="btn btn-warning badge badge-pill btn-edit" data-id="${data}" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-edit"></i> Edit</span>
+                  <span class="btn btn-danger badge badge-pill btn-hapus" data-id="${data}"><i class="fas fa-fw fa-trash"></i> Hapus</span>
+                `;
+                return btnAksi;
+              },
+            },
+          ],
+        });
+
+        //* button Tambah
+        $("#btn-tambah").on("click", function () {
+          $("#exampleModalInputLabel").text("Tambah Data");
+          formInput.reset();
+          $("#save-submit").show();
+          $("#edit-submit").hide();
+        });
+
+        //* button Edit
+        $("#dataTable").on("click", ".btn-edit", async function () {
+          const id = $(this).data("id");
+          $("#exampleModalInputLabel").text("Edit Data");
+          $("#edit-submit").data("id", id);
+          $("#save-submit").hide();
+          $("#edit-submit").show();
+          console.log(id);
+          formInput.reset();
+          await getData("users")
+            .then((result) => {
+              console.log(result[id]);
+              $.each($("#form-input input"), function (i, v) {
+                v.value = result[id][v.name];
+              });
+            })
+            .catch((err) => {
+              alert("database bermasalah");
+            });
+        });
+
+        //* button Hapus
+        $("#dataTable").on("click", ".btn-hapus", function () {
+          const id = $(this).data("id");
+          Swal.fire({
+            title: "Apakah anda yakin?",
+            text: "data yang terhapus tidak dapat dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#e74a3b",
+            confirmButtonText: "Hapus",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              deleteData("users", id).then(() => {
+                Swal.fire("Terhapus!", "Data berhasil dihapus!", "success").then(
+                  () => {
+                    window.location.reload();
+                  }
+                );
+              });
+            }
+          });
+        });
+
+        //* aksi Tambah
+        $("#save-submit").on("click", function (e) {
+          e.preventDefault();
+          const formData = new FormData(formInput);
+          console.log(...formData);
+          const formDataObj = {};
+          formData.forEach((value, key) => (formDataObj[key] = value));
+          insertData("users", formDataObj).then(() => {
+            Swal.fire("Tersimpan!", "Data berhasil disimpan!", "success").then(
+              () => {
+                window.location.reload();
+              }
+            );
+          });
+        });
+        //* aksi Edit
+        $("#edit-submit").on("click", function (e) {
+          e.preventDefault();
+          const formData = new FormData(formInput);
+          const id = $("#edit-submit").data("id");
+          console.log(...formData);
+          const formDataObj = {};
+          formData.forEach((value, key) => (formDataObj[key] = value));
+          updateData("users", formDataObj, "-NN7Sc8towc0KPodBGhE").then(() => {
+            Swal.fire("Teredit!", "Data berhasil diedit!", "success").then(
+              () => {
+                window.location.reload();
+              }
+            );
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
