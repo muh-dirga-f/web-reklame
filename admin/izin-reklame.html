@@ -25,6 +25,10 @@
 
     <!-- Custom styles for this template-->
     <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link
+      href="../assets/vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body id="page-top">
@@ -148,9 +152,9 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="nameUser mr-2 d-none d-lg-inline text-gray-600 small"
-                    ></span
-                  >
+                  <span
+                    class="nameUser mr-2 d-none d-lg-inline text-gray-600 small"
+                  ></span>
                   <img
                     class="img-profile rounded-circle"
                     src="../assets/img/undraw_profile.svg"
@@ -192,24 +196,42 @@
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
                   <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">List Data Diproses</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      List Data Diproses
+                    </h6>
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-3">
+                      <div class="col-4">
                         <div class="row">
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1">Cari</span>
+                              <span class="input-group-text" id="basic-addon1"
+                                >Cari</span
+                              >
                             </div>
-                            <input type="text" class="form-control" placeholder="Masukkan Nomor Reklame" aria-label="reklame" aria-describedby="basic-addon1">
+                            <input
+                              type="text"
+                              id="search-bar-reklame"
+                              class="form-control"
+                              placeholder="Masukkan Nomor Reklame"
+                              aria-label="reklame"
+                              aria-describedby="basic-addon1"
+                            />
                           </div>
                         </div>
-                        <div class="row font-weight-bold text-primary">Result :</div>
-                        <div class="row">Data Tidak Ditemukan</div>
+                        <div class="row font-weight-bold text-primary">
+                          Result :
+                        </div>
+                        <div id="hasil-search-reklame" class="row">
+                          Data Tidak Ditemukan
+                        </div>
                       </div>
-                      <div class="col-9">
-                        <table class="table table-sm table-bordered table-hovered">
+                      <div class="col-8">
+                        <table
+                          id="dataTable"
+                          class="table table-sm table-bordered table-hovered"
+                        >
                           <thead class="bg-primary text-white">
                             <th>#</th>
                             <th>NIK</th>
@@ -220,7 +242,9 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td colspan="6" class="text-center">Data masih kosong</td>
+                              <td colspan="6" class="text-center">
+                                Data masih kosong
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -236,10 +260,15 @@
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
                   <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-success">List Data Diterima</h6>
+                    <h6 class="m-0 font-weight-bold text-success">
+                      List Data Diterima
+                    </h6>
                   </div>
                   <div class="card-body">
-                    <table class="table table-sm table-bordered table-hovered">
+                    <table
+                      id="dataTable2"
+                      class="table table-sm table-bordered table-hovered"
+                    >
                       <thead class="bg-success text-white">
                         <th>#</th>
                         <th>NIK</th>
@@ -250,7 +279,9 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td colspan="6" class="text-center">Data masih kosong</td>
+                          <td colspan="6" class="text-center">
+                            Data masih kosong
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -264,10 +295,15 @@
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
                   <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-danger">List Data Ditolak</h6>
+                    <h6 class="m-0 font-weight-bold text-danger">
+                      List Data Ditolak
+                    </h6>
                   </div>
                   <div class="card-body">
-                    <table class="table table-sm table-bordered table-hovered">
+                    <table
+                      id="dataTable3"
+                      class="table table-sm table-bordered table-hovered"
+                    >
                       <thead class="bg-danger text-white">
                         <th>#</th>
                         <th>NIK</th>
@@ -278,7 +314,9 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td colspan="6" class="text-center">Data masih kosong</td>
+                          <td colspan="6" class="text-center">
+                            Data masih kosong
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -343,11 +381,178 @@
             >
               Cancel
             </button>
-            <a class="btn btn-primary" onclick="javascript: localStorage.clear()" href="../index.html">Logout</a>
+            <a
+              class="btn btn-primary"
+              onclick="javascript: localStorage.clear()"
+              href="../index.html"
+              >Logout</a
+            >
           </div>
         </div>
       </div>
     </div>
+    <!-- modal input -->
+    <form id="form-input">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalInputLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalInputLabel"></h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>NIK</label>
+                <input name="nik" type="text" class="form-control" readonly />
+              </div>
+              <div class="form-group">
+                <label>Fullname</label>
+                <input name="nama" type="text" class="form-control" readonly />
+              </div>
+              <div class="form-group">
+                <label>Jenis Izin</label>
+                <input
+                  name="jenis_izin"
+                  type="text"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+              <div class="form-group">
+                <label>Nomor Izin</label>
+                <input
+                  name="nomor_surat"
+                  type="text"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+              <div class="form-group">
+                <label>Nomor Izin Terdahulu (khusus izin perpanjangan)</label>
+                <input
+                  name="izin_terdahulu"
+                  type="text"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+              <div class="form-group">
+                <label>Surat Permohonan/Isian formulir</label><br />
+                <a
+                  name="surat_permohonan"
+                  class="btn btn-primary"
+                  target="_blank"
+                  href=""
+                  ><i class="fa fw fa-save"></i> Download</a
+                >
+              </div>
+              <div class="form-group">
+                <label
+                  >FC KTP Pemohon Izin/Penanggung Jawab/Direktur Utama</label
+                ><br />
+                <img name="ktp" src="" alt="gambar masih kosong" width="100%" />
+              </div>
+              <div class="form-group">
+                <label
+                  >FC Akta Pendirian/Perubahan Sebagai Badan Hukum Dari Instansi
+                  yang Berwenang</label
+                ><br />
+                <img
+                  name="akta"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  >FC. Surat Tanah (SKKT, Sertifikat, Apabila Milik
+                  Sendiri)</label
+                ><br />
+                <img
+                  name="surat_tanah"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+              <div class="form-group">
+                <label>FC. Surat Sewa </label><br />
+                <img
+                  name="surat_sewa"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+              <div class="form-group">
+                <label>Gambar Surat Keterangan Tempat Usaha (SKTU)</label><br />
+                <img
+                  name="sktu"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+              <div class="form-group">
+                <label>Denah Lokasi Pemasangan Reklame</label><br />
+                <img
+                  name="lokasi"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+              <div class="form-group">
+                <label>Gambar Reklame</label><br />
+                <img
+                  name="gambar_reklame"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+              <div class="form-group">
+                <label>FC IMB</label><br />
+                <img name="imb" src="" alt="gambar masih kosong" width="100%" />
+              </div>
+              <div class="form-group">
+                <label>Nomor Pokok Wajib Pajak Daerah (NPWPD)</label><br />
+                <img
+                  name="npwpd"
+                  src=""
+                  alt="gambar masih kosong"
+                  width="100%"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
 
     <!-- Bootstrap core JavaScript-->
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
@@ -357,7 +562,319 @@
     <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
+    <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../assets/js/sweetalert.js"></script>
     <script src="../assets/js/custom.js"></script>
+    <script type="module">
+      import {
+        getData,
+        insertData,
+        updateData,
+        deleteData,
+        login,
+      } from "../assets/js/firebase.js";
+
+      $(document).ready(async function () {
+        const reklameReq = async () => {
+          let data;
+          await getData("reklame").then((result) => {
+            data = result;
+          });
+          return data;
+        };
+        const dataReklame = await reklameReq();
+
+        let formInput = $("#form-input")[0];
+        const detailData = async (id) => {
+          $("#exampleModalInputLabel").text("Detail Data");
+          $("#save-submit").hide();
+          $("#edit-submit").hide();
+          console.log(id);
+          formInput.reset();
+          await getData("reklame")
+            .then((result) => {
+              console.log(result[id]);
+              $.each($("#form-input input"), function (i, v) {
+                v.value = result[id][v.name];
+              });
+              $.each($("#form-input img"), function (i, v) {
+                v.src = result[id][v.name];
+              });
+              $.each($("#form-input a"), function (i, v) {
+                v.href = result[id][v.name];
+              });
+            })
+            .catch((err) => {
+              alert("database bermasalah");
+            });
+        };
+        const dataTable = $("#dataTable").DataTable({
+          processing: true,
+          responsive: true,
+          ajax: {
+            url: "https://reklame-b464e-default-rtdb.asia-southeast1.firebasedatabase.app/reklame.json",
+            dataSrc: function (obj) {
+              const CollectRecord = [];
+              for (const key in obj) {
+                if (Object.hasOwnProperty.call(obj, key)) {
+                  const data = obj[key];
+                  if (data.status == "diproses") {
+                    const newData = Object.assign({ id: key }, data);
+                    CollectRecord.push(newData);
+                  }
+                }
+              }
+              return CollectRecord;
+            },
+          },
+          columns: [
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                return meta.row + 1;
+              },
+            },
+            { data: "nik" },
+            { data: "nama" },
+            { data: "nomor_surat" },
+            { data: "jenis_izin" },
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                let btnAksi = `
+                  <span class="btn btn-info badge badge-pill btn-detail" data-id="${data}" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-eye"></i> Detail</span>
+                  <span class="btn btn-success badge badge-pill btn-verifikasi" data-id="${data}"><i class="fas fa-fw fa-check"></i> Verifikasi</span>
+                  <span class="btn btn-danger badge badge-pill btn-reject" data-id="${data}"><i class="fas fa-fw fa-times"></i> Tolak</span>
+                `;
+                return btnAksi;
+              },
+            },
+          ],
+        });
+        const dataTable2 = $("#dataTable2").DataTable({
+          processing: true,
+          ajax: {
+            url: "https://reklame-b464e-default-rtdb.asia-southeast1.firebasedatabase.app/reklame.json",
+            dataSrc: function (obj) {
+              const CollectRecord = [];
+              for (const key in obj) {
+                if (Object.hasOwnProperty.call(obj, key)) {
+                  const data = obj[key];
+                  if (data.status == "diverifikasi") {
+                    const newData = Object.assign({ id: key }, data);
+                    CollectRecord.push(newData);
+                  }
+                }
+              }
+              return CollectRecord;
+            },
+          },
+          columns: [
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                return meta.row + 1;
+              },
+            },
+            { data: "nik" },
+            { data: "nama" },
+            { data: "nomor_surat" },
+            { data: "jenis_izin" },
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                let btnAksi = `
+                  <span class="btn btn-info badge badge-pill btn-detail" data-id="${data}" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-eye"></i> Detail</span>
+                  <span class="btn btn-success badge badge-pill btn-izin" data-id="${data}" data-toggle="modal"><i class="fas fa-fw fa-eye"></i> Lihat Izin</span>
+                `;
+                return btnAksi;
+              },
+            },
+          ],
+        });
+        const dataTable3 = $("#dataTable3").DataTable({
+          processing: true,
+          ajax: {
+            url: "https://reklame-b464e-default-rtdb.asia-southeast1.firebasedatabase.app/reklame.json",
+            dataSrc: function (obj) {
+              const CollectRecord = [];
+              for (const key in obj) {
+                if (Object.hasOwnProperty.call(obj, key)) {
+                  const data = obj[key];
+                  if (data.status == "ditolak") {
+                    const newData = Object.assign({ id: key }, data);
+                    CollectRecord.push(newData);
+                  }
+                }
+              }
+              return CollectRecord;
+            },
+          },
+          columns: [
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                return meta.row + 1;
+              },
+            },
+            { data: "nik" },
+            { data: "nama" },
+            { data: "nomor_surat" },
+            { data: "jenis_izin" },
+            {
+              data: "id",
+              render: function (data, type, full, meta) {
+                let btnAksi = `
+                  <span class="btn btn-info badge badge-pill btn-detail" data-id="${data}" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-eye"></i> Detail</span>
+                `;
+                return btnAksi;
+              },
+            },
+          ],
+        });
+
+        //button verifikasi
+        $("#dataTable").on("click", ".btn-verifikasi", async function () {
+          const id = $(this).data("id");
+          const ajaxReklame = async () => {
+            let data;
+            await getData("reklame/" + id).then((result) => {
+              data = result;
+            });
+            return data;
+          };
+          const reklame = await ajaxReklame();
+          reklame.status = "diverifikasi";
+          Swal.fire({
+            title: "Apakah anda yakin?",
+            text: "memverifikasi data ini?",
+            icon: "warning",
+            showCancelButton: true,
+            // confirmButtonColor: "#e74a3b",
+            confirmButtonText: "Verifikasi",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              updateData("reklame", reklame, id).then(() => {
+                Swal.fire(
+                  "Diverifikasi!",
+                  "Data diverifikasi!",
+                  "success"
+                ).then(() => {
+                  window.location.reload();
+                });
+              });
+            }
+          });
+        });
+        //button reject
+        $("#dataTable").on("click", ".btn-reject", async function () {
+          const id = $(this).data("id");
+          const ajaxReklame = async () => {
+            let data;
+            await getData("reklame/" + id).then((result) => {
+              data = result;
+            });
+            return data;
+          };
+          const reklame = await ajaxReklame();
+          reklame.status = "ditolak";
+          Swal.fire({
+            title: "Apakah anda yakin?",
+            text: "menolak data ini?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#e74a3b",
+            confirmButtonText: "Tolak",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              updateData("reklame", reklame, id).then(() => {
+                Swal.fire("Ditolak!", "Data ditolak!", "error").then(() => {
+                  window.location.reload();
+                });
+              });
+            }
+          });
+        });
+        //* button Detail
+        $("#dataTable").on("click", ".btn-detail", async function () {
+          const id = $(this).data("id");
+          await detailData(id);
+        });
+        $("#dataTable2").on("click", ".btn-detail", async function () {
+          const id = $(this).data("id");
+          await detailData(id);
+        });
+        $("#dataTable3").on("click", ".btn-detail", async function () {
+          const id = $(this).data("id");
+          await detailData(id);
+        });
+        //* button Hapus
+        $("#dataTable").on("click", ".btn-hapus", function () {
+          const id = $(this).data("id");
+          Swal.fire({
+            title: "Apakah anda yakin?",
+            text: "data yang terhapus tidak dapat dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#e74a3b",
+            confirmButtonText: "Hapus",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              deleteData("users", id).then(() => {
+                Swal.fire(
+                  "Terhapus!",
+                  "Data berhasil dihapus!",
+                  "success"
+                ).then(() => {
+                  window.location.reload();
+                });
+              });
+            }
+          });
+        });
+
+        $("#search-bar-reklame").on("keyup", async function () {
+          let nomor_surat = $(this).val();
+          for (const key in dataReklame) {
+            if (Object.hasOwnProperty.call(dataReklame, key)) {
+              const element = dataReklame[key];
+              if (nomor_surat == element.nomor_surat) {
+                console.log(element);
+                $("#hasil-search-reklame").html(`
+                <table>
+                  <tr>
+                    <td>NIK</td>
+                    <td>:</td>
+                    <td>${element.nik}</td>
+                  </tr>
+                  <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td>${element.nama}</td>
+                  </tr>
+                  <tr>
+                    <td>Status</td>
+                    <td>:</td>
+                    <td>${element.status}</td>
+                  </tr>
+                </table>
+                `);
+              }
+            }
+          }
+        });
+        setTimeout(() => {
+          $("#dataTable_length").hide();
+          $("#dataTable2_length").hide();
+          $("#dataTable3_length").hide();
+          $("#dataTable_filter").hide();
+          $("#dataTable2_filter").hide();
+          $("#dataTable3_filter").hide();
+        }, 10);
+      });
+    </script>
   </body>
 </html>
