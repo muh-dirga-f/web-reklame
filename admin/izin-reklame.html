@@ -424,6 +424,15 @@
                 <input name="nama" type="text" class="form-control" readonly />
               </div>
               <div class="form-group">
+                <label>Alamat</label>
+                <input
+                  name="alamat"
+                  type="text"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+              <div class="form-group">
                 <label>Jenis Izin</label>
                 <input
                   name="jenis_izin"
@@ -445,6 +454,15 @@
                 <label>Nomor Izin Terdahulu (khusus izin perpanjangan)</label>
                 <input
                   name="izin_terdahulu"
+                  type="text"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+              <div class="form-group">
+                <label>Lama Pemasangan</label>
+                <input
+                  name="lama_pemasangan"
                   type="text"
                   class="form-control"
                   readonly
@@ -567,6 +585,12 @@
     <script src="../assets/js/sb-admin-2.min.js"></script>
     <script src="../assets/js/sweetalert.js"></script>
     <script src="../assets/js/custom.js"></script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/polyfills.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.3/purify.min.js"></script>
+
     <script type="module">
       import {
         getData,
@@ -575,6 +599,9 @@
         deleteData,
         login,
       } from "../assets/js/firebase.js";
+
+      const { jsPDF } = window.jspdf;
+      var pdf = new jsPDF("p", "px", [1300, 900]);
 
       $(document).ready(async function () {
         const reklameReq = async () => {
@@ -687,7 +714,7 @@
               render: function (data, type, full, meta) {
                 let btnAksi = `
                   <span class="btn btn-info badge badge-pill btn-detail" data-id="${data}" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-fw fa-eye"></i> Detail</span>
-                  <span class="btn btn-success badge badge-pill btn-izin" data-id="${data}" data-toggle="modal"><i class="fas fa-fw fa-eye"></i> Lihat Izin</span>
+                  <span class="btn btn-success badge badge-pill btn-izin" data-id="${data}" data-toggle="modal"><i class="fas fa-fw fa-save"></i> Download Izin</span>
                 `;
                 return btnAksi;
               },
@@ -746,7 +773,18 @@
             return data;
           };
           const reklame = await ajaxReklame();
+          const date = new Date();
+          const options = {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          };
+          var currentDate = new Date(); //use your date here
+          currentDate.toLocaleDateString("en-US");
           reklame.status = "diverifikasi";
+          reklame.tanggal = new Intl.DateTimeFormat("id-ID", options).format(
+            date
+          );
           Swal.fire({
             title: "Apakah anda yakin?",
             text: "memverifikasi data ini?",
@@ -801,6 +839,164 @@
         $("#dataTable").on("click", ".btn-detail", async function () {
           const id = $(this).data("id");
           await detailData(id);
+        });
+        $("#dataTable2").on("click", ".btn-detail", async function () {
+          const id = $(this).data("id");
+          await detailData(id);
+        });
+        $("#dataTable3").on("click", ".btn-detail", async function () {
+          const id = $(this).data("id");
+          await detailData(id);
+        });
+        //lihat izin
+        $("#dataTable2").on("click", ".btn-izin", async function () {
+          const id = $(this).data("id");
+          console.log(dataReklame[id]);
+          // for (const key in dataReklame) {
+          //   if (Object.hasOwnProperty.call(dataReklame, key)) {
+          //     const element = dataReklame[key];
+          //     if (nomor_surat == element.nomor_surat) {
+          //     }
+          //   }
+          // }
+          const { jsPDF } = window.jspdf;
+          let nomor_surat = dataReklame[id].nomor_surat;
+          let tanggal = dataReklame[id].tanggal;
+          let nama = dataReklame[id].nama;
+          let alamat = dataReklame[id].alamat;
+          let lama = dataReklame[id].lama_pemasangan;
+
+          var doc = new jsPDF("p", "px", [1200, 700]);
+
+          doc.setFontSize(30);
+          doc.text(150, 50, "PEMERINTAH KABUPATEN PINRANG");
+          doc.setFontSize(20);
+          doc.text(
+            100,
+            70,
+            "DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU"
+          );
+          doc.text(195, 90, "UNIT PELAYANAN TERPADU SATU PINTU");
+          doc.setFontSize(16);
+          doc.text(
+            150,
+            110,
+            "Jl. Jend. Sekawati Nomor 40. Telp/Fax : (0421)921695 Pinrang 91212"
+          );
+          doc.setLineWidth(2.5);
+          doc.line(100, 115, 600, 115);
+
+          doc.setFontSize(18);
+          doc.text(195, 135, "KEPUTUSAN KEPALA DINAS PENANAMAN MODAL");
+          doc.text(
+            155,
+            150,
+            "DAN LAYANAN TERPADU SATU PINTU KABUPATEN PINRANG"
+          );
+          doc.setFontSize(13);
+          doc.text(
+            240,
+            165,
+            "Nomor : " + nomor_surat + "/0002/REKLAME/DPMPTSP/02/2023"
+          );
+
+          doc.text(330, 185, "Tentang");
+
+          doc.setFontSize(16);
+          doc.text(305, 205, "IZIN REKLAME");
+          doc.setFontSize(13);
+
+          doc.text(100, 220, "Menimbang");
+          doc.text(180, 220, ":");
+          doc.text(
+            190,
+            220,
+            "bahwa berdasarkan penelitian terhadap permohonan yang diterim tanggal " +
+              tanggal +
+              " atas"
+          );
+          doc.text(
+            190,
+            230,
+            "nama " +
+              nama +
+              " dianggap telah memenuhi syarat-syarat yang diperlukan sehingga dapat"
+          );
+          doc.text(190, 240, "diberikan Izin Reklame.");
+
+          doc.text(100, 260, "Mengingat");
+          doc.text(180, 260, ":");
+          doc.text(
+            190,
+            260,
+            "1. Peraturan Daerah Kabupaten Daerah Tk. II Pinrang Nomor 6 Tahun 1998 Tentang pajak Reklame;"
+          );
+          doc.text(
+            190,
+            270,
+            "2. Peraturan Bupati Pinrang Nomor 48 Tahun 2016; dan"
+          );
+          doc.text(
+            190,
+            280,
+            "3. Peraturan Bupati Pinrang Nomor 38 Tahun 2019."
+          );
+
+          doc.text(100, 300, "Memperhatikan");
+          doc.text(180, 300, ":");
+          doc.text(
+            190,
+            300,
+            "1. Rekomendasi Tim Teknis PTSP : 0370/R/T.Teknisi/DPMPTSP/2023, Tanggal : " +
+              tanggal
+          );
+          doc.text(
+            190,
+            310,
+            "2. Berita Acara Pemeriksaan (BAP) Nomor : 0001/BAP/REKLAME/DPMPTPS/2023."
+          );
+          doc.text(201, 320, "Tanggal : " + tanggal);
+
+          doc.text(310, 340, "MEMUTUSKAN");
+          doc.text(100, 360, "Menetapkan");
+          doc.text(180, 360, ":");
+          doc.text(100, 370, "KESATU");
+          doc.text(180, 370, ":");
+          doc.text(190, 370, "Memberikan Izin Reklame Kepada :");
+          doc.text(190, 380, "1. Nama Penanggung Jawab");
+          doc.text(330, 380, ": " + nama);
+          doc.text(190, 390, "2. Alamat Penanggung Jawab");
+          doc.text(330, 390, ": " + alamat);
+          doc.text(190, 400, "3. Lama Pemasangan");
+          doc.text(330, 400, ": " + lama);
+          doc.text(100, 410, "KEDUA");
+          doc.text(180, 410, ":");
+          doc.text(
+            190,
+            410,
+            "Izin Reklame ini telah dilakukan perhitungan dan pembayaran retribusi sesuai SKP DAERAH sebesar"
+          );
+          doc.text(
+            190,
+            420,
+            '2.553.000 Terbilang "Dua Juta Lima Ratus Lima Puluh Tiga Ribu Rupiah"'
+          );
+          doc.text(100, 430, "KETIGA");
+          doc.text(180, 430, ":");
+          doc.text(
+            190,
+            430,
+            "Keputusan ini mulai berlaku pada tanggal ditetapkan, apabila kemudian hari terdapat kekeliruan,"
+          );
+          doc.text(
+            190,
+            440,
+            "dan akan diadakan perbaikan sebagaimana mestinya."
+          );
+
+          // doc.save("a4.pdf");
+          // doc.save('test.pdf');
+          doc.output("dataurlnewwindow");
         });
         $("#dataTable2").on("click", ".btn-detail", async function () {
           const id = $(this).data("id");
