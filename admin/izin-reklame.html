@@ -779,8 +779,6 @@
             month: "2-digit",
             year: "numeric",
           };
-          var currentDate = new Date(); //use your date here
-          currentDate.toLocaleDateString("en-US");
           reklame.status = "diverifikasi";
           reklame.tanggal = new Intl.DateTimeFormat("id-ID", options).format(
             date
@@ -817,6 +815,15 @@
             return data;
           };
           const reklame = await ajaxReklame();
+          const date = new Date();
+          const options = {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          };
+          reklame.tanggal = new Intl.DateTimeFormat("id-ID", options).format(
+            date
+          );
           reklame.status = "ditolak";
           Swal.fire({
             title: "Apakah anda yakin?",

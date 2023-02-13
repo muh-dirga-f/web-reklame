@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unduh Izin</title>
+  </head>
+  <body>
+    <h1>Unduh Izin</h1>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/polyfills.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.3/purify.min.js"></script>
+
+    <script src="../assets/js/custom.js"></script>
+    <script>
+      $(document).ready(function () {
+        var data = window.location.search.slice(6);
+        data = decodeURIComponent(data);
+        data = JSON.parse(data);
+
+        const { jsPDF } = window.jspdf;
+        let nomor_surat = data.nomor_surat;
+        let tanggal = data.tanggal;
+        let nama = data.nama;
+        let alamat = data.alamat;
+        let lama = data.lama_pemasangan;
+
+        var doc = new jsPDF("p", "px", [1200, 700]);
+
+        doc.setFontSize(30);
+        doc.text(150, 50, "PEMERINTAH KABUPATEN PINRANG");
+        doc.setFontSize(20);
+        doc.text(
+          100,
+          70,
+          "DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU"
+        );
+        doc.text(195, 90, "UNIT PELAYANAN TERPADU SATU PINTU");
+        doc.setFontSize(16);
+        doc.text(
+          150,
+          110,
+          "Jl. Jend. Sekawati Nomor 40. Telp/Fax : (0421)921695 Pinrang 91212"
+        );
+        doc.setLineWidth(2.5);
+        doc.line(100, 115, 600, 115);
+
+        doc.setFontSize(18);
+        doc.text(195, 135, "KEPUTUSAN KEPALA DINAS PENANAMAN MODAL");
+        doc.text(155, 150, "DAN LAYANAN TERPADU SATU PINTU KABUPATEN PINRANG");
+        doc.setFontSize(13);
+        doc.text(
+          240,
+          165,
+          "Nomor : " + nomor_surat + "/0002/REKLAME/DPMPTSP/02/2023"
+        );
+
+        doc.text(330, 185, "Tentang");
+
+        doc.setFontSize(16);
+        doc.text(305, 205, "IZIN REKLAME");
+        doc.setFontSize(13);
+
+        doc.text(100, 220, "Menimbang");
+        doc.text(180, 220, ":");
+        doc.text(
+          190,
+          220,
+          "bahwa berdasarkan penelitian terhadap permohonan yang diterim tanggal " +
+            tanggal +
+            " atas"
+        );
+        doc.text(
+          190,
+          230,
+          "nama " +
+            nama +
+            " dianggap telah memenuhi syarat-syarat yang diperlukan sehingga dapat"
+        );
+        doc.text(190, 240, "diberikan Izin Reklame.");
+
+        doc.text(100, 260, "Mengingat");
+        doc.text(180, 260, ":");
+        doc.text(
+          190,
+          260,
+          "1. Peraturan Daerah Kabupaten Daerah Tk. II Pinrang Nomor 6 Tahun 1998 Tentang pajak Reklame;"
+        );
+        doc.text(
+          190,
+          270,
+          "2. Peraturan Bupati Pinrang Nomor 48 Tahun 2016; dan"
+        );
+        doc.text(190, 280, "3. Peraturan Bupati Pinrang Nomor 38 Tahun 2019.");
+
+        doc.text(100, 300, "Memperhatikan");
+        doc.text(180, 300, ":");
+        doc.text(
+          190,
+          300,
+          "1. Rekomendasi Tim Teknis PTSP : 0370/R/T.Teknisi/DPMPTSP/2023, Tanggal : " +
+            tanggal
+        );
+        doc.text(
+          190,
+          310,
+          "2. Berita Acara Pemeriksaan (BAP) Nomor : 0001/BAP/REKLAME/DPMPTPS/2023."
+        );
+        doc.text(201, 320, "Tanggal : " + tanggal);
+
+        doc.text(310, 340, "MEMUTUSKAN");
+        doc.text(100, 360, "Menetapkan");
+        doc.text(180, 360, ":");
+        doc.text(100, 370, "KESATU");
+        doc.text(180, 370, ":");
+        doc.text(190, 370, "Memberikan Izin Reklame Kepada :");
+        doc.text(190, 380, "1. Nama Penanggung Jawab");
+        doc.text(330, 380, ": " + nama);
+        doc.text(190, 390, "2. Alamat Penanggung Jawab");
+        doc.text(330, 390, ": " + alamat);
+        doc.text(190, 400, "3. Lama Pemasangan");
+        doc.text(330, 400, ": " + lama);
+        doc.text(100, 410, "KEDUA");
+        doc.text(180, 410, ":");
+        doc.text(
+          190,
+          410,
+          "Izin Reklame ini telah dilakukan perhitungan dan pembayaran retribusi sesuai SKP DAERAH sebesar"
+        );
+        doc.text(
+          190,
+          420,
+          '2.553.000 Terbilang "Dua Juta Lima Ratus Lima Puluh Tiga Ribu Rupiah"'
+        );
+        doc.text(100, 430, "KETIGA");
+        doc.text(180, 430, ":");
+        doc.text(
+          190,
+          430,
+          "Keputusan ini mulai berlaku pada tanggal ditetapkan, apabila kemudian hari terdapat kekeliruan,"
+        );
+        doc.text(190, 440, "dan akan diadakan perbaikan sebagaimana mestinya.");
+
+        doc.text(390, 460, "Diterbitkan di Pinrang pad Tanggal " + tanggal);
+        doc.setLineWidth(0.7);
+        doc.line(390, 470, 620, 470);
+        doc.line(390, 470, 390, 560);
+        doc.line(620, 470, 620, 560);
+        doc.line(390, 560, 620, 560);
+        doc.addImage(imageTTDSK, "PNG", 395, 475, 40, 80);
+        doc.setFontSize(11);
+        doc.text(440, 485, "Ditandatangani Secara Elektronik Oleh :");
+        doc.setFontSize(15);
+        doc.text(440, 505, "Andi Mirani, AP., M.Si.");
+        doc.setFontSize(11);
+        doc.text(440, 515, "NIP. 197406031993112001");
+        doc.text(440, 535, "Kepala Dinas Penanaman Modal dan PTSP");
+        doc.text(440, 545, "Selaku Kelapa Unit PTSP Kab. Pinrang");
+
+        // doc.save("a4.pdf");
+        doc.save("test.pdf");
+        // doc.output("dataurlnewwindow");
+      });
+    </script>
+  </body>
+</html>
