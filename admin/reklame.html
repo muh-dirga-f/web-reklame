@@ -417,7 +417,7 @@
                   width="100%"
                 />
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>Gambar Reklame</label><br />
                 <img
                   name="gambar_reklame"
@@ -425,7 +425,7 @@
                   alt="gambar masih kosong"
                   width="100%"
                 />
-              </div>
+              </div> -->
               <div class="form-group">
                 <label>FC IMB</label><br />
                 <img name="imb" src="" alt="gambar masih kosong" width="100%" />
@@ -487,8 +487,10 @@
               for (const key in obj) {
                 if (Object.hasOwnProperty.call(obj, key)) {
                   const data = obj[key];
-                  const newData = Object.assign({ id: key }, data);
-                  CollectRecord.push(newData);
+                  if (data.status == "diverifikasi") {
+                    const newData = Object.assign({ id: key }, data);
+                    CollectRecord.push(newData);
+                  }
                 }
               }
               return CollectRecord;

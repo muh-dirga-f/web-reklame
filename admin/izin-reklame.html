@@ -535,7 +535,7 @@
                   width="100%"
                 />
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>Gambar Reklame</label><br />
                 <img
                   name="gambar_reklame"
@@ -543,7 +543,7 @@
                   alt="gambar masih kosong"
                   width="100%"
                 />
-              </div>
+              </div> -->
               <div class="form-group">
                 <label>FC IMB</label><br />
                 <img name="imb" src="" alt="gambar masih kosong" width="100%" />
@@ -1001,6 +1001,8 @@
             "dan akan diadakan perbaikan sebagaimana mestinya."
           );
 
+          doc.addImage(barcodeSK, "PNG", 100, 470, 90, 90);
+
           doc.text(390, 460, "Diterbitkan di Pinrang pad Tanggal " + tanggal);
           doc.setLineWidth(0.7);
           doc.line(390, 470, 620, 470);
@@ -1018,7 +1020,7 @@
           doc.text(440, 545, "Selaku Kelapa Unit PTSP Kab. Pinrang");
 
           // doc.save("a4.pdf");
-          // doc.save('test.pdf');
+          // doc.save("test.pdf");
           doc.output("dataurlnewwindow");
         });
         $("#dataTable2").on("click", ".btn-detail", async function () {
